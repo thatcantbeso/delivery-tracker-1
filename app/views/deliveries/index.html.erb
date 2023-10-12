@@ -3,7 +3,7 @@
     <h1>
       Delivery Tracker
     </h1>
-     <p>Know if something gets lost in the mail.</p>
+    <p>Know if something gets lost in the mail.</p>
   </div>
 </div>
 
@@ -15,45 +15,45 @@
       Expecting a package?
     </h2>
 
-    <% if current_user != nil %> 
+    <% if current_user != nil %>
 
-    <form action="/insert_delivery" method="post">
-      <div>
-        <label for="description_box">
-          Description
-        </label>
+      <form action="/insert_delivery" method="post">
+        <div>
+          <label for="description_box">
+            Description
+          </label>
 
-        <input type="text" id="description_box" name="query_description">
-      </div>
+          <input type="text" id="description_box" name="query_description">
+        </div>
 
-      <div>
-        <label for="supposed_to_arrive_on_box">
-          Supposed to arrive on
-        </label>
+        <div>
+          <label for="supposed_to_arrive_on_box">
+            Supposed to arrive on
+          </label>
 
-        <input type="date" id="supposed_to_arrive_on_box" name="query_supposed_to_arrive_on">
-      </div>
+          <input type="date" id="supposed_to_arrive_on_box" name="query_supposed_to_arrive_on">
+        </div>
 
-      <div>
-        <label for="details_box">
-          Details
-        </label>
+        <div>
+          <label for="details_box">
+            Details
+          </label>
 
-        <textarea id="details_box" name="query_details" rows="3"></textarea>
-      </div>
+          <textarea id="details_box" name="query_details" rows="3"></textarea>
+        </div>
 
-      <div>
-        <label for="delivery_id_box">
-          Delivery ID
-        </label>
+        <div>
+          <label for="delivery_id_box">
+            Delivery ID
+          </label>
 
-        <input type="text" id="delivery_id_box" name="query_delivery_id" value="<%= current_user.id %>">
+          <input type="text" id="delivery_id_box" name="query_delivery_id" value="<%= current_user.id %>">
 
-      </div>
+        </div>
 
-      <button>
-        Log delivery
-      </button>
+        <button>
+          Log delivery
+        </button>
       <% end %>
     </form>
   </div>
@@ -61,22 +61,25 @@
 
 <hr>
 <div>
-  <div>
-      <h2>Waiting on</h2>
+  <div class="waiting_on">
+    <h2>Waiting on</h2>
 
     <% @list_of_deliveries.each do |a_delivery| %>
       <ul>
-      
-       <div><li> <%= a_delivery.description %></li></div>
-       
-       <div>Supposed to arrive on <%= a_delivery.supposed_to_arrive_on %></div>
-      
-       <div> <%= a_delivery.details %></div>
-       
+        <%# a_delivery.order({ :supposed_to_arrive_on => :desc })%>
+
+        <div>
+          <li> <%= a_delivery.description %></li>
+        </div>
+
+        <div>Supposed to arrive on <%= a_delivery.supposed_to_arrive_on %></div>
+
+        <div> <%= a_delivery.details %></div>
+
       </ul>
     <% end %>
 
-   <!-- <table border="1">
+    <!-- <table border="1">
       <tr>
         <th>
           ID
@@ -111,33 +114,33 @@
       </tr>
 
       <%# @list_of_deliveries.each do |a_delivery| %>-->
-<!--      <tr>
+    <!--      <tr>
         <td>
           <%#= a_delivery.id %>-->
-<!--        </td>
+    <!--        </td>
 
         <td>
           <%#= a_delivery.description %>-->
-<!--        </td>
+    <!--        </td>
 
         <td>
           <%#= a_delivery.supposed_to_arrive_on %>-->
-<!--        </td>
+    <!--        </td>
 
         <td>
           <%#= a_delivery.details %>-->
-<!--        </td>
+    <!--        </td>
 
         <td>
           <%#= a_delivery.delivery_id %>-->
-<!--        </td>
+    <!--        </td>
 
         <td>
           <%#= time_ago_in_words(a_delivery.created_at) %> ago-->
-<!--        </td>
+    <!--        </td>
         <td>
           <%#= time_ago_in_words(a_delivery.updated_at) %> ago-->
-<!--        </td>
+    <!--        </td>
 
         <td>
           <a href="/deliveries/<%#= a_delivery.id %>">
@@ -146,10 +149,13 @@
         </td>
       </tr>
       <%# end %>-->
-<!--    </table>
+    <!--    </table>
   </div>
 </div>
 -->
-<hr>
+    <hr>
+<div class="received">
+    <h2>Received</h2>
 
-<h2>Received</h2>
+
+</div>
