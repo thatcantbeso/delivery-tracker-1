@@ -44,11 +44,17 @@
 
         <div>
           <label for="delivery_id_box">
-            Delivery ID
           </label>
 
-          <input type="text" id="delivery_id_box" name="query_delivery_id" value="<%= current_user.id %>">
+          <input type="hidden" id="delivery_id_box" name="query_delivery_id" value="<%= current_user.id %>">
 
+        </div>
+
+        <div>
+          <label for="received_box">
+          </label>
+
+          <input type="hidden" id="received_box" name="query_received" value="false">
         </div>
 
         <button>
@@ -63,8 +69,7 @@
 <div>
   <div class="waiting_on">
     <h2>Waiting on</h2>
-
-    <% @list_of_deliveries.each do |a_delivery| %>
+    <% @not_received.each do |a_delivery| %>
       <ul>
         <div>
           <li> <%= a_delivery.description %></li>
@@ -73,62 +78,31 @@
         <div>Supposed to arrive on <%= a_delivery.supposed_to_arrive_on %></div>
 
         <div> <%= a_delivery.details %></div>
-        <button>Mark as received</button>
+        <form action="/modify_delivery/<%= a_delivery.id %>" method="post">
+          <div>
+            <label for="received_box">
+              Received
+            </label>
 
+            <input type="hidden" id="received_box" name="query_received" value="true">
+          </div>
+
+          <button>Mark as received</button>
+        </form>
       </ul>
     <% end %>
-
-    <%# @list_of_deliveries.each do |a_delivery| %>
-      <!--      <tr>
-        <td>
-          <%#= a_delivery.id %>-->
-      <!--        </td>
-
-        <td>
-          <%#= a_delivery.description %>-->
-      <!--        </td>
-
-        <td>
-          <%#= a_delivery.supposed_to_arrive_on %>-->
-      <!--        </td>
-
-        <td>
-          <%#= a_delivery.details %>-->
-      <!--        </td>
-
-        <td>
-          <%#= a_delivery.delivery_id %>-->
-      <!--        </td>
-
-        <td>
-          <%#= time_ago_in_words(a_delivery.created_at) %> ago-->
-      <!--        </td>
-        <td>
-          <%#= time_ago_in_words(a_delivery.updated_at) %> ago-->
-      <!--        </td>
-
-        <td>
-          <a href="/deliveries/<%#= a_delivery.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <%# end %>-->
-      <!--    </table>
   </div>
-</div>
--->
-      <hr>
-      <div class="received">
-        <h2>Received</h2>
-        <% @list_of_deliveries.each do |a_delivery| %>
-          <ul>
+  <hr>
 
-            <li> <%= a_delivery.description %></li>
-            <div> 
-              <small>Updated <%= time_ago_in_words(a_delivery.created_at) %> <a href="/delete_delivery/:path_id">Delete</a></small>
-            </div>
+  <div class="received">
 
-          </ul>
-        <% end %>
-      </div>
+    <h2>Received</h2>
+    <% @received.each do |a_delivery| %>
+      <ul>
+        <li> <%= a_delivery.description %> 
+
+      <div> <small>Updated <%= time_ago_in_words(a_delivery.created_at) %> <a href="/delete_delivery/<%= a_delivery.id %>">Delete</a></small> </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>

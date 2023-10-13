@@ -22,5 +22,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many(:deliveries, :class_name =>"Delivery")
+  #has_many(:deliveries, :class_name =>"Delivery")
 end
