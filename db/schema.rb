@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_12_190653) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_13_163151) do
   create_table "deliveries", force: :cascade do |t|
     t.string "description"
     t.date "supposed_to_arrive_on"
